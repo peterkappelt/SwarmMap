@@ -15,6 +15,7 @@
 #include <ctime>
 #include <vector>
 
+#include <boost/serialization/library_version_type.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/serialization/vector.hpp>
 #include <boost/serialization/set.hpp>
@@ -298,6 +299,7 @@ std::string toString(const Object &obj) {
     try {
         oa << obj;
     } catch (boost::archive::archive_exception &e) {
+        std::cerr << "Serialization error: " << e.what() << std::endl;
     }
 
     return out.str();
