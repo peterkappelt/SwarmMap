@@ -32,7 +32,7 @@ set(SRCS_DUTILS
   DUtils/Timestamp.cpp)
 
 #find_package(OpenCV REQUIRED)
-find_package(OpenCV 3.1.0 QUIET)
+find_package(OpenCV 4.10.0 QUIET)
 
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
 
