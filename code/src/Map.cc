@@ -56,10 +56,12 @@ namespace ORB_SLAM2 {
 
     bool Map::TryConnect(AgentMediator *pMediator) {
         pConnectionService = new ServerService(pMediator);
+        return true;
     }
 
     bool Map::TryConnect(System *pSLAM) {
         pConnectionService = new ClientService(pSLAM);
+        return true;
     }
 
 
