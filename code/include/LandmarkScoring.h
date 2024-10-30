@@ -82,7 +82,7 @@ public:
     static int round;
 
     static double GetRequestPriority(const ORB_SLAM2::MapSlice &slice);
-    static std::vector<double> Rank(const MapSlice &slice);
+    static void Rank(const MapSlice &slice);
     static std::vector<double> GetScores(const std::vector<KeyFrame *>KFs);
     static std::vector<double> GetScores(const std::vector<MapPoint *> MPs);
 private:

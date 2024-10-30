@@ -243,7 +243,7 @@ namespace ORB_SLAM2 {
         item.score += score;
     }
 
-    std::vector<double> LandmarkScoring::Rank(const MapSlice &slice) {
+    void LandmarkScoring::Rank(const MapSlice &slice) {
 
         std::vector<KeyFrame *> vpKF = slice.KFs;
         std::vector<MapPoint *> vpMP = slice.MPs;
