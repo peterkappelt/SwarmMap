@@ -74,6 +74,11 @@ void ClientService::SendRequest(const Request &req) {
     // serialize and send request
     std::string msg = ORB_SLAM2::toString(req);
 
+    if(this->service == NULL){
+        std::cout << "ClientService.service session is NULL" << std::endl;
+        return;
+    }
+
     this->service->send(make_shared<std::string>(msg));
 }
 
