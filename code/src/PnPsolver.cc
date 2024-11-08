@@ -440,13 +440,14 @@ void PnPsolver::choose_control_points(void)
   cv::Mat DC(3, 1, CV_64F, dc);
   cv::Mat UC(3, 3, CV_64F);
   cv::Mat UCt(3, 3, CV_64F, uct);
+  cv::Mat vt(3, 3, CV_64F);
 
   for(int i = 0; i < number_of_correspondences; i++)
     for(int j = 0; j < 3; j++)
       PW0.at<double>(i, j) = pws[3 * i + j] - cws[0][j];
 
   cv::gemm(PW0, PW0, 1.0, cv::Mat(), 0.0, PW0tPW0, cv::GEMM_1_T);
-  cv::SVD::compute(PW0tPW0, DC, UC, cv::Mat(), cv::SVD::MODIFY_A | cv::SVD::FULL_UV);
+  cv::SVD::compute(PW0tPW0, DC, UC, vt, cv::SVD::MODIFY_A | cv::SVD::FULL_UV);
   UCt = UC.t();
 
   PW0.release();
@@ -539,9 +540,10 @@ double PnPsolver::compute_pose(double R[3][3], double t[3])
   cv::Mat D(12,  1, CV_64F, d);
   cv::Mat U(12, 12, CV_64F);
   cv::Mat Ut(12, 12, CV_64F, ut);
+  cv::Mat vt(3, 3, CV_64F);
 
   cv::gemm(M, M, 1.0, cv::Mat(), 0.0, MtM, cv::GEMM_1_T);
-  cv::SVD::compute(MtM, D, U, cv::Mat(), cv::SVD::MODIFY_A | cv::SVD::FULL_UV);
+  cv::SVD::compute(MtM, D, U, vt, cv::SVD::MODIFY_A | cv::SVD::FULL_UV);
   Ut = U.t();
   M.release();
 
