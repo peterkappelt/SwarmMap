@@ -155,6 +155,10 @@ namespace ORB_SLAM2 {
                     e->setVertex(0, dynamic_cast<g2o::OptimizableGraph::Vertex *>(optimizer.vertex(id)));
                     e->setVertex(1, dynamic_cast<g2o::OptimizableGraph::Vertex *>(optimizer.vertex(pKF->mnId)));
                     e->setMeasurement(obs);
+                    if(kpUn.octave < 0){
+                        std::cout << "invSigma2 is null. This is a bug." << std::endl;
+                        continue;
+                    }
                     const float &invSigma2 = pKF->mvInvLevelSigma2[kpUn.octave];
                     Eigen::Matrix3d Info = Eigen::Matrix3d::Identity() * invSigma2;
                     e->setInformation(Info);
