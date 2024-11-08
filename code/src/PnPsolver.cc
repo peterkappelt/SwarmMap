@@ -443,7 +443,7 @@ void PnPsolver::choose_control_points(void)
 
   for(int i = 0; i < number_of_correspondences; i++)
     for(int j = 0; j < 3; j++)
-      PW0.at<double>(3 * i, j) = pws[3 * i + j] - cws[0][j];
+      PW0.at<double>(i, j) = pws[3 * i + j] - cws[0][j];
 
   cv::gemm(PW0, PW0, 1.0, cv::Mat(), 0.0, PW0tPW0, cv::GEMM_1_T);
   cv::SVD::compute(PW0tPW0, DC, UC, cv::Mat(), cv::SVD::MODIFY_A | cv::SVD::FULL_UV);
